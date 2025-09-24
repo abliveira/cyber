@@ -8,7 +8,6 @@ Beyond simply obscuring data, encryption underpins many higher-level security me
 
 As cryptographic standards evolve, modern encryption practices emphasize the use of authenticated encryption (e.g., AES-GCM, ChaCha20-Poly1305), robust key management strategies, resistance to side-channel attacks, and compliance with current cryptographic guidance from institutions such as NIST and ISO/IEC.
 
----
 
 ## Core Principles of Cryptographic Security
 
@@ -22,7 +21,6 @@ Modern encryption systems aim to enforce several key security objectives. The th
 
 These three principles are the foundation of secure systems and are often referred to collectively as the CIA triad.
 
----
 
 ## Additional Key Concepts in Encryption
 
@@ -39,8 +37,6 @@ Encryption not only ensures confidentiality, integrity, and authentication, but 
 
 - **Replay Protection**  
   Replay protection safeguards against attackers who attempt to retransmit valid encrypted messages to gain unauthorized access or cause unintended effects. Protocols implementing replay protection can detect and reject duplicate or outdated messages.
-
----
 
 ## Types of Encryption
 
@@ -66,7 +62,30 @@ Common asymmetric algorithms:
 
 Asymmetric encryption is often used to establish secure connections (e.g., in SSL/TLS protocols), exchange symmetric keys, or sign data digitally.
 
----
+## Key Management and Security Considerations
+
+The strength of any cryptographic system—whether symmetric or asymmetric—depends not only on the mathematical security of the algorithm but also on how cryptographic keys are generated, stored, distributed, rotated, and revoked. Poor key management can compromise even the strongest algorithms.
+
+- **Key Generation**: Keys must be generated using secure, high-entropy sources of randomness. Weak, predictable, or reused keys can be broken regardless of algorithm strength. Symmetric keys, which are shared between parties, require particularly careful generation to avoid collisions or duplication.
+
+- **Key Storage**:  
+  - Private keys in asymmetric systems must be stored securely, often in encrypted form or within specialized hardware such as Hardware Security Modules (HSMs) or Trusted Platform Modules (TPMs).  
+  - Symmetric keys should also be stored securely and separately from the data they protect. Storing keys in plaintext or insecure databases introduces severe risks.  
+
+- **Key Distribution**:  
+  - For asymmetric cryptography, public keys must be distributed in a trustworthy manner. Public Key Infrastructure (PKI) and digital certificates (issued by trusted Certificate Authorities) verify ownership and prevent impersonation.  
+  - Symmetric keys must be shared securely, often via secure channels or using asymmetric encryption to protect the key during transit.  
+
+- **Key Rotation**: Periodic key replacement reduces the potential impact of a compromised key. Symmetric keys may need more frequent rotation, especially in high-volume communications, while asymmetric key pairs should also be rotated according to policy.  
+
+- **Key Revocation**: Systems must support revoking compromised or expired keys. Asymmetric keys use mechanisms such as Certificate Revocation Lists (CRLs) or Online Certificate Status Protocol (OCSP). Symmetric keys may require updating all parties and re-encrypting sensitive data.  
+
+- **Access Control**: Policies should strictly define who can access keys. Unauthorized access may allow attackers to decrypt sensitive data or impersonate the key owner.  
+
+- **Backup and Recovery**: Private and symmetric keys need secure backup mechanisms. Losing keys may result in permanent loss of access to encrypted data or the ability to authenticate users.
+
+Even robust algorithms such as AES (symmetric) or RSA/ECC/Diffie-Hellman (asymmetric) cannot guarantee confidentiality, integrity, or authenticity without rigorous key management practices.
+
 
 ## Best Practices for Encryption
 
